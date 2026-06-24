@@ -40,7 +40,7 @@
                     successMessage: 'Loaded successfully!',
                     loadingMessage: 'Loading...',
                     loadingWorldConfigMessage: 'Loading world config...',
-                    credits: 'Defesa Disponível by JDi4s'
+                    credits: 'Modificado por João Morgado'
                 },
                 pt_PT: {
                     title: 'Contagem de Tropas em Casa e em Buscas',
@@ -72,7 +72,7 @@
                     successMessage: 'Carregado com sucesso!',
                     loadingMessage: 'A carregar...',
                     loadingWorldConfigMessage: 'A carregar configurações do mundo...',
-                    credits: 'Defesa Disponível by JDi4s e Modificado por João Morgado'
+                    credits: 'Modificado por João Morgado'
                 }
             };
         }
