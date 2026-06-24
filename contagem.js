@@ -454,7 +454,7 @@
                 contentType: 'application/json',
                 data: JSON.stringify(embedData),
                 success: function () {
-                    alert("Defesa compartilhada com a liderança!");
+                    alert("Operação efetuada com sucesso - Defesa partilhada com a Liderança no Ticket!");
                 },
                 error: function () {
                     alert("Houve um erro ao enviar os dados para o Discord.");
