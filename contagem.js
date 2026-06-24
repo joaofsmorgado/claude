@@ -549,7 +549,7 @@
     <div class="dd-shell">
         <div class="dd-header">
             <div class="dd-header-left">
-                <img url="https://i.pinimg.com/originals/64/6e/71/646e7164adf368769f5300570f641267.gif"></img>
+                <img src="https://i.pinimg.com/originals/64/6e/71/646e7164adf368769f5300570f641267.gif" width="100" height="100"></img>
                 <div class="dd-kicker">Tribal Wars</div>
                 <h3>${t.title}</h3>
                 <div class="dd-sub">${t.subtitle}</div>
