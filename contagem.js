@@ -431,10 +431,10 @@
             }
 
             const embedData = {
-                content: `**Resumo da tropa defensiva do **jogador:** ${playerName} - (Atualizado em: ${this.#getServerTime()})**\n`,
+                content: `**Resumo da tropa defensiva do jogador:** ${playerName} - **(Atualizado em: ${this.#getServerTime()})**\n<br>`,
                 embeds: [
                     {
-                        title: "**🛡️ RESUMO DE TROPA DEFENSIVA**",
+                        title: "**🛡️ TOTAL**",
                         fields: [
                             { name: "🗂️ **Grupo Atual**", value: currentGroup, inline: false },
                             { name: "<:lanceiro:1368839513891409972> **Lanceiros**", value: `${discordDefensiveTroops.spear || 0}`, inline: true },
