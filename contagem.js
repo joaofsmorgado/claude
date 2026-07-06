@@ -652,8 +652,7 @@
             <div class="dd-actions">
                 ${groupsHtml}
                 <button id="dd-refresh" class="dd-btn dd-btn-secondary">${t.refresh}</button>
-                <button id="dd-send-discord" class="dd-btn dd-btn-primary">${t.sendDiscord}</button>
-                <button id="dd-send-sheet" class="dd-btn dd-btn-primary">Enviar para o Site</button>
+                <button id="dd-send-sheet" class="dd-btn dd-btn-primary">Enviar Defesa</button>
             </div>
         </div>
 
