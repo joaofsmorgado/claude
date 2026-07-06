@@ -40,7 +40,7 @@
                     successMessage: 'Loaded successfully!',
                     loadingMessage: 'Loading...',
                     loadingWorldConfigMessage: 'Loading world config...',
-                    credits: 'Credits to J4Di4s and João Morgado'
+                    credits: 'Defesa Disponível by JDi4s'
                 },
                 pt_PT: {
                     title: 'Contagem de Tropas em Casa e em Buscas',
@@ -72,7 +72,7 @@
                     successMessage: 'Carregado com sucesso!',
                     loadingMessage: 'A carregar...',
                     loadingWorldConfigMessage: 'A carregar configurações do mundo...',
-                    credits: 'Créditos a J4Di4s e João Morgado'
+                    credits: 'Defesa Disponível by JDi4s e Modificado por João Morgado'
                 }
             };
         }
@@ -431,10 +431,10 @@
             }
 
             const embedData = {
-                content: `**Resumo da tropa defensiva do jogador:** ${playerName} - **(Atualizado em: ${this.#getServerTime()})**\n<br>`,
+                content: `**Resumo da tropa defensiva do **jogador:** ${playerName} - (Atualizado em: ${this.#getServerTime()})**\n`,
                 embeds: [
                     {
-                        title: "**🛡️ TOTAL**",
+                        title: "**🛡️ RESUMO DE TROPA DEFENSIVA**",
                         fields: [
                             { name: "🗂️ **Grupo Atual**", value: currentGroup, inline: false },
                             { name: "<:lanceiro:1368839513891409972> **Lanceiros**", value: `${discordDefensiveTroops.spear || 0}`, inline: true },
@@ -454,7 +454,7 @@
                 contentType: 'application/json',
                 data: JSON.stringify(embedData),
                 success: function () {
-                    alert("Operação efetuada com sucesso - Defesa partilhada com a Liderança no Ticket!");
+                    alert("Defesa compartilhada com a liderança!");
                 },
                 error: function () {
                     alert("Houve um erro ao enviar os dados para o Discord.");
@@ -549,13 +549,9 @@
     <div class="dd-shell">
         <div class="dd-header">
             <div class="dd-header-left">
-                <img class="dd-logo" src="https://i.pinimg.com/originals/64/6e/71/646e7164adf368769f5300570f641267.gif">
-            
-                <div class="dd-title-block">
-                    <div class="dd-kicker">Tribal Wars</div>
-                    <h3>${t.title}</h3>
-                    <div class="dd-sub">${t.subtitle}</div>
-                </div>
+                <div class="dd-kicker">Tribal Wars</div>
+                <h3>${t.title}</h3>
+                <div class="dd-sub">${t.subtitle}</div>
             </div>
             <div class="dd-header-right">
                 <div class="dd-stamp">${serverTime}</div>
@@ -671,29 +667,6 @@
     text-transform: uppercase;
     letter-spacing: .12em;
     margin-bottom: 6px;
-}
-
-#dd-root .dd-header-left {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-}
-
-#dd-root .dd-logo {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    flex-shrink: 0;
-}
-
-#dd-root .dd-title-block {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-#dd-root .dd-title-block h3 {
-    margin: 0 0 6px 0;
 }
 
 #dd-root h3 {
