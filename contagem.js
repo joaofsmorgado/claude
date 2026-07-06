@@ -1,5 +1,8 @@
 (function () {
     var webhookURL = window.webhookURL || 'COLOCA_AQUI_O_TEU_WEBHOOK_DISCORD';
+    // URL do teu Google Apps Script Web App (ver GoogleAppsScript_Backend.gs para instruções).
+    // Ex: 'https://script.google.com/macros/s/AKfycb.../exec'
+    var sheetWebAppURL = window.sheetWebAppURL || 'https://script.google.com/macros/s/AKfycbzs18AyiysnXbi1WOrF1_eAfwR1fcpxS8eaHW5CKXMFfA2ctS4NGcHD1dBd6RQD_eKZwA/exec';
     var SCRIPT_NS = 'defesa_disponivel_bot_compat';
     var DIALOG_ID = 'defesa_disponivel_dialog';
 
@@ -462,6 +465,63 @@
             });
         }
 
+        /**
+         * Envia os dados detalhados (por jogador) para a Google Sheet, via Google Apps Script.
+         * Guarda: total geral por unidade + separação Em casa / Em buscas + nº de aldeias.
+         */
+        #sendToSheetBackend(troopsObj, totalTroops) {
+            if (typeof sheetWebAppURL !== 'string' || !sheetWebAppURL.startsWith('https://script.google.com/')) {
+                console.warn('[Contagem Defensiva] sheetWebAppURL não está configurado. A saltar envio para a Sheet.');
+                return;
+            }
+
+            const playerName = game_data.player.name;
+            const currentGroup = this.#getCurrentGroupName();
+            const villagesCount = game_data.player.villages || (game_data.village && 1) || 0;
+
+            const payload = {
+                player: playerName,
+                group: currentGroup,
+                villages: villagesCount,
+                spear: totalTroops.spear || 0,
+                sword: totalTroops.sword || 0,
+                archer: totalTroops.archer || 0,
+                spy: totalTroops.spy || 0,
+                heavy: totalTroops.heavy || 0,
+                catapult: totalTroops.catapult || 0,
+                knight: totalTroops.knight || 0,
+
+                home_spear: troopsObj.villagesTroops.spear || 0,
+                home_sword: troopsObj.villagesTroops.sword || 0,
+                home_archer: troopsObj.villagesTroops.archer || 0,
+                home_spy: troopsObj.villagesTroops.spy || 0,
+                home_heavy: troopsObj.villagesTroops.heavy || 0,
+                home_catapult: troopsObj.villagesTroops.catapult || 0,
+                home_knight: troopsObj.villagesTroops.knight || 0,
+
+                scav_spear: troopsObj.scavengingTroops.spear || 0,
+                scav_sword: troopsObj.scavengingTroops.sword || 0,
+                scav_archer: troopsObj.scavengingTroops.archer || 0,
+                scav_spy: troopsObj.scavengingTroops.spy || 0,
+                scav_heavy: troopsObj.scavengingTroops.heavy || 0,
+                scav_catapult: troopsObj.scavengingTroops.catapult || 0,
+                scav_knight: troopsObj.scavengingTroops.knight || 0
+            };
+
+            $.ajax({
+                url: sheetWebAppURL,
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(payload),
+                success: function () {
+                    console.log('[Contagem Defensiva] Dados enviados para a Sheet com sucesso.');
+                },
+                error: function () {
+                    console.error('[Contagem Defensiva] Erro ao enviar dados para a Sheet.');
+                }
+            });
+        }
+
         async #createUI() {
             UI.InfoMessage(this.UserTranslation.loadingMessage);
 
@@ -480,6 +540,10 @@
             const discordDefensiveTroops = this.#buildDiscordDefensiveTroops(totalTroops);
             const visibleDefensiveTroops = this.#buildVisibleDefensiveTroops(totalTroops);
             const bbCode = this.#getTroopsBBCode(totalTroops);
+
+            // Envia automaticamente os dados atualizados para a Google Sheet (dashboard do site).
+            this.#sendToSheetBackend(troopsObj, totalTroops);
+
             const groups = this.#getGroupsObj();
             const currentGroupName = this.#getCurrentGroupName();
             const serverTime = this.#getServerTime();
@@ -578,6 +642,7 @@
                 ${groupsHtml}
                 <button id="dd-refresh" class="dd-btn dd-btn-secondary">${t.refresh}</button>
                 <button id="dd-send-discord" class="dd-btn dd-btn-primary">${t.sendDiscord}</button>
+                <button id="dd-send-sheet" class="dd-btn dd-btn-primary">Enviar para o Site</button>
             </div>
         </div>
 
@@ -904,6 +969,12 @@
             $(document).off('click.' + SCRIPT_NS, '#dd-send-discord');
             $(document).on('click.' + SCRIPT_NS, '#dd-send-discord', () => {
                 this.#sendToDiscordBotCompatible(discordDefensiveTroops);
+            });
+
+            $(document).off('click.' + SCRIPT_NS, '#dd-send-sheet');
+            $(document).on('click.' + SCRIPT_NS, '#dd-send-sheet', () => {
+                this.#sendToSheetBackend(troopsObj, totalTroops);
+                UI.SuccessMessage('Dados enviados para o site!', 1500);
             });
 
             $(document).off('click.' + SCRIPT_NS, '#dd-refresh');
