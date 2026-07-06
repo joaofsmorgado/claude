@@ -2,7 +2,11 @@
     var webhookURL = window.webhookURL || 'COLOCA_AQUI_O_TEU_WEBHOOK_DISCORD';
     // URL do teu Google Apps Script Web App (ver GoogleAppsScript_Backend.gs para instruções).
     // Ex: 'https://script.google.com/macros/s/AKfycb.../exec'
-    var sheetWebAppURL = window.sheetWebAppURL || 'https://script.google.com/macros/s/AKfycbz_FcrXiBRLqFcvKemD9Iy8xR_30y7Nshye1S6BMn6D4RIkgMoQoypOHp4pELLp7Zq8Rg/exec';
+    var sheetWebAppURL = window.sheetWebAppURL || 'https://script.google.com/macros/s/AKfycbzI3sSM-xI9AZpdqmsr2INpB2Ae9Z9CmAglOXkqga5X58E05q9FYMjVP7tcuSXCjtmn/exec';
+    // Chave de ESCRITA — tem de ser IGUAL à WRITE_KEY definida no Google Apps Script.
+    // Todos os membros que correm este script têm esta chave, mas ela só permite
+    // ENVIAR dados, não permite ver o dashboard nem os dados de outros jogadores.
+    var sheetWriteKey = window.sheetWriteKey || 'CLAUDE-CONTAGEM-116';
     var SCRIPT_NS = 'defesa_disponivel_bot_compat';
     var DIALOG_ID = 'defesa_disponivel_dialog';
 
@@ -480,6 +484,7 @@
             const villagesCount = game_data.player.villages || (game_data.village && 1) || 0;
 
             const payload = {
+                key: sheetWriteKey,
                 player: playerName,
                 group: currentGroup,
                 villages: villagesCount,
