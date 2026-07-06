@@ -2,7 +2,7 @@
     var webhookURL = window.webhookURL || 'COLOCA_AQUI_O_TEU_WEBHOOK_DISCORD';
     // URL do teu Google Apps Script Web App (ver GoogleAppsScript_Backend.gs para instruções).
     // Ex: 'https://script.google.com/macros/s/AKfycb.../exec'
-    var sheetWebAppURL = window.sheetWebAppURL || 'https://script.google.com/macros/s/AKfycbzs18AyiysnXbi1WOrF1_eAfwR1fcpxS8eaHW5CKXMFfA2ctS4NGcHD1dBd6RQD_eKZwA/exec';
+    var sheetWebAppURL = window.sheetWebAppURL || 'https://script.google.com/macros/s/AKfycbz_FcrXiBRLqFcvKemD9Iy8xR_30y7Nshye1S6BMn6D4RIkgMoQoypOHp4pELLp7Zq8Rg/exec';
     var SCRIPT_NS = 'defesa_disponivel_bot_compat';
     var DIALOG_ID = 'defesa_disponivel_dialog';
 
