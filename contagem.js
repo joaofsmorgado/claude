@@ -1,6 +1,5 @@
 (function () {
     var webhookURL = window.webhookURL || 'COLOCA_AQUI_O_TEU_WEBHOOK_DISCORD';
-    var googleSheetsAPI = 'https://script.google.com/macros/s/AKfycbyEMsWQMjyhQNTlpEETDk8Qb9xBHOuZHZvo3iUbDA3nLbfNvfYOS9cDLvht62oVvJUp/exec';
     var SCRIPT_NS = 'defesa_disponivel_bot_compat';
     var DIALOG_ID = 'defesa_disponivel_dialog';
 
@@ -420,38 +419,6 @@
             }
 
             return bbCode;
-        }
-
-        async #sendToGoogleSheets(totalTroops) {
-            const payload = {
-        
-                player: game_data.player.name,
-                group: this.#getCurrentGroupName(),
-                villages: game_data.player.villages,
-                spear: totalTroops.spear || 0,
-                sword: totalTroops.sword || 0,
-                archer: totalTroops.archer || 0,
-                spy: totalTroops.spy || 0,
-                heavy: totalTroops.heavy || 0,
-                catapult: totalTroops.catapult || 0,
-                knight: totalTroops.knight || 0,
-                updated: this.#getServerTime()
-        
-            };
-        
-            $.ajax({
-                url: googleSheetsAPI,
-                method: "POST",
-                contentType: "application/json",
-                data: JSON.stringify(payload),
-                success: function () {
-                    console.log("Dados enviados para Google Sheets.");
-                },
-                error: function (xhr) {
-                    console.error("Erro ao enviar para Google Sheets", xhr);
-                }
-            });
-        
         }
 
         #sendToDiscordBotCompatible(discordDefensiveTroops) {
@@ -964,7 +931,6 @@
             $(document).off('click.' + SCRIPT_NS, '#dd-send-discord');
             $(document).on('click.' + SCRIPT_NS, '#dd-send-discord', () => {
                 this.#sendToDiscordBotCompatible(discordDefensiveTroops);
-                await this.#sendToGoogleSheets(totalTroops);
             });
 
             $(document).off('click.' + SCRIPT_NS, '#dd-refresh');
