@@ -508,16 +508,22 @@
                 scav_knight: troopsObj.scavengingTroops.knight || 0
             };
 
+            // IMPORTANTE: usa 'text/plain' e não 'application/json'.
+            // Com 'application/json' o browser faz um pedido OPTIONS (preflight) antes do
+            // POST, e o Google Apps Script não responde a esse preflight — o pedido é
+            // bloqueado por CORS e o doPost() nunca chega a executar.
+            // Com 'text/plain' o pedido é "simples" (sem preflight) e o Apps Script
+            // continua a conseguir fazer JSON.parse ao conteúdo normalmente.
             $.ajax({
                 url: sheetWebAppURL,
                 method: 'POST',
-                contentType: 'application/json',
+                contentType: 'text/plain;charset=utf-8',
                 data: JSON.stringify(payload),
-                success: function () {
-                    console.log('[Contagem Defensiva] Dados enviados para a Sheet com sucesso.');
+                success: function (response) {
+                    console.log('[Contagem Defensiva] Dados enviados para a Sheet com sucesso.', response);
                 },
-                error: function () {
-                    console.error('[Contagem Defensiva] Erro ao enviar dados para a Sheet.');
+                error: function (xhr, status, errorMsg) {
+                    console.error('[Contagem Defensiva] Erro ao enviar dados para a Sheet.', status, errorMsg, xhr);
                 }
             });
         }
