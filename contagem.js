@@ -624,10 +624,13 @@
     <div class="dd-shell">
         <div class="dd-header">
             <div class="dd-header-left">
-                <img src="https://i.pinimg.com/originals/64/6e/71/646e7164adf368769f5300570f641267.gif"  width="100" height="100">
-                <div class="dd-kicker">Tribal Wars</div>
-                <h3>${t.title}</h3>
-                <div class="dd-sub">${t.subtitle}</div>
+                <img class="dd-logo" src="https://i.pinimg.com/originals/64/6e/71/646e7164adf368769f5300570f641267.gif">
+            
+                <div class="dd-title-block">
+                    <div class="dd-kicker">Tribal Wars</div>
+                    <h3>${t.title}</h3>
+                    <div class="dd-sub">${t.subtitle}</div>
+                </div>
             </div>
             <div class="dd-header-right">
                 <div class="dd-stamp">${serverTime}</div>
@@ -982,8 +985,17 @@
     width: 100px;
     height: 100px;
     object-fit: cover;
-    border-radius: 12px;
     flex-shrink: 0;
+}
+
+#dd-root .dd-title-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#dd-root .dd-title-block h3 {
+    margin: 0 0 6px 0;
 }
 </style>
 `;
