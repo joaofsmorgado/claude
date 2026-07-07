@@ -978,11 +978,6 @@
     gap: 18px;
 }
 
-#dd-root .dd-header-text {
-    display: flex;
-    flex-direction: column;
-}
-
 #dd-root .dd-logo {
     width: 100px;
     height: 100px;
