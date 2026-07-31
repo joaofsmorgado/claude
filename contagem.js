@@ -2,7 +2,7 @@
     var webhookURL = window.webhookURL || 'COLOCA_AQUI_O_TEU_WEBHOOK_DISCORD';
     // URL do teu Google Apps Script Web App (ver GoogleAppsScript_Backend.gs para instruções).
     // Ex: 'https://script.google.com/macros/s/AKfycb.../exec'
-    var sheetWebAppURL = window.sheetWebAppURL || 'https://script.google.com/macros/s/AKfycbwe40qqKZRbOxZbnjRqbmPWxiBOP7_qcCCWPHFDmnJuT_x3JVYE_uUXxNsf8AFmJgW2WA/exec';
+    var sheetWebAppURL = window.sheetWebAppURL || 'https://script.google.com/macros/s/AKfycbxUxkMpv-YCgkUFedvorsvFU-HlHRbUo6slO3f3k6DgTJn679UuuXt5gA5JsEEmTLM5oQ/exec';
     // Chave de ESCRITA — tem de ser IGUAL à WRITE_KEY definida no Google Apps Script.
     // Todos os membros que correm este script têm esta chave, mas ela só permite
     // ENVIAR dados, não permite ver o dashboard nem os dados de outros jogadores.
